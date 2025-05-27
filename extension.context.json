@@ -1,4 +1,7 @@
 {
     "EXTENSION_API_KEY": "68353c17c98ac397392d6dfe",
-    "EXTENSION_API_SECRET": "_Mq1~7brO-o_Ohu"
+    "EXTENSION_API_SECRET": "_Mq1~7brO-o_Ohu",
+    "DEVELOPMENT_COMPANY": 10282,
+    "CURRENT_ENV": "api.fynd.com",
+    "EXTENSION_BASE_URL": "https://bon-hc-emacs-panic.trycloudflare.com"
 }
