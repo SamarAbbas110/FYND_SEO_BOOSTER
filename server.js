@@ -8,7 +8,8 @@ const { readFileSync } = require('fs');
 const { setupFdk } = require("@gofynd/fdk-extension-javascript/express");
 const { SQLiteStorage } = require("@gofynd/fdk-extension-javascript/express/storage");
 const sqliteInstance = new sqlite3.Database('session_storage.db');
-const productRouter = express.Router();
+const productRouter = require('./routes/product.routes');
+const seoRouter = require('./routes/seo.routes');
 
 
 const fdkExtension = setupFdk({
@@ -77,37 +78,14 @@ app.post('/api/webhook-events', async function(req, res) {
     }
 })
 
-productRouter.get('/', async function view(req, res, next) {
-    try {
-        const {
-            platformClient
-        } = req;
-        const data = await platformClient.catalog.getProducts()
-        return res.json(data);
-    } catch (err) {
-        next(err);
-    }
-});
-
-// Get products list for application
-productRouter.get('/application/:application_id', async function view(req, res, next) {
-    try {
-        const {
-            platformClient
-        } = req;
-        const { application_id } = req.params;
-        const data = await platformClient.application(application_id).catalog.getAppProducts()
-        return res.json(data);
-    } catch (err) {
-        next(err);
-    }
-});
-
 // FDK extension api route which has auth middleware and FDK client instance attached to it.
-platformApiRoutes.use('/products', productRouter);
 
 // If you are adding routes outside of the /api path, 
 // remember to also add a proxy rule for them in /frontend/vite.config.js
+
+// Add the product routes to the platform API routes
+platformApiRoutes.use('/products', productRouter)
+platformApiRoutes.use('/seo', seoRouter);
 app.use('/api', platformApiRoutes);
 
 // Serve the React app for all other routes
