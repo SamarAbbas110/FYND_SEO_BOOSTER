@@ -4,7 +4,9 @@ async function generateSeoMetadata(inputText) {
   try {
     const prompt = `
 Given the following content, generate an SEO-optimized title and meta description.
-
+Try to generate the title and description with a score of 70 or above. Keep relevance to the content, and ensure they are concise and engaging.
+Keep the title under 60 characters and the description under 160 characters.
+Try using power words to make them more compelling.
 Only return a valid JSON object with keys "title" and "description" and nothing else.
 Content:
 ${inputText}

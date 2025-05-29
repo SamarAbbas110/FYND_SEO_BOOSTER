@@ -2,6 +2,6 @@ const { generateSeo } = require('../controllers/seo.controller')
 const express = require('express')
 const router = express.Router()
 
-router.route('/generate-seo').post(generateSeo)
+router.route('/generate').post(generateSeo)
 
 module.exports = router
